@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from shortner.views import HomePage, TinyView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', HomePage.as_view()),
+    path('b/<slug:shortcode>/', TinyView.as_view()),
 ]
