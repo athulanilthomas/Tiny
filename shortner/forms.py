@@ -1,3 +1,4 @@
+from django import forms
 from .validators import validate_url, check_com
 
 class SubmitURL(forms.Form):
