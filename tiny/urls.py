@@ -21,5 +21,5 @@ from shortner.views import HomePage, TinyView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePage.as_view()),
-    path('b/<slug:shortcode>/', TinyView.as_view()),
+    path('/<slug:shortcode>/', TinyView.as_view(), name='scode'),
 ]

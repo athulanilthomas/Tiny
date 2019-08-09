@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from .utils import code_generator, shortcode_creator
 from .validators import check_com, validate_url
+from django.urls import reverse
 
 # Create your models here.
 
@@ -32,3 +33,8 @@ class tinyURL(models.Model):
         if self.short_code is None or self.short_code == "":
             self.short_code = shortcode_creator(self)
         super(tinyURL, self).save(*args, **kwargs)
+    
+    def get_shortcode(self):
+        url_path = reverse('scode', kwargs={'shortcode' : self.short_code})
+        #return "https://www.tiny.com" + url_path
+        return "tiny.com:8000" + url_path

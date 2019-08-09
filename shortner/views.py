@@ -27,8 +27,8 @@ class HomePage(View):
            new_url = the_form.cleaned_data.get("url")
            obj, created = tinyURL.objects.get_or_create(url=new_url)
            context = {
-               "Object": obj,
-               "Created": created,
+               "object": obj,
+               "created": created,
            }
            if created:
                template = "shortener/success.html"
@@ -37,6 +37,7 @@ class HomePage(View):
 
         return render(request, template, context)
 
+# **********************   URL will be redirected from HERE  ********************
 class TinyView(View):
     def get(self, request, shortcode=None, *args, **kwargs):
         obj = get_object_or_404(tinyURL,short_code=shortcode)
