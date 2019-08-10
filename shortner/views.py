@@ -1,7 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-
 from .models import tinyURL
 from .forms import SubmitURL
 
@@ -12,28 +11,34 @@ class HomePage(View):
         the_form = SubmitURL()
         context = {
                     "title" : "Tiny Shortner",
-                    "form" :  the_form,      
+                    "form" :  the_form,
+                    "status": None,   
             }
         return render(request, 'shortener/home.html', context)
     
     def post(self, request, *args, **kwargs):
         the_form = SubmitURL(request.POST)
-        context = {
-                    "title" : "Tiny Shortner",
-                    "form" :  the_form,      
-            }
         template = "shortener/home.html"
         if the_form.is_valid():
            new_url = the_form.cleaned_data.get("url")
            obj, created = tinyURL.objects.get_or_create(url=new_url)
-           context = {
-               "object": obj,
-               "created": created,
-           }
+           form = SubmitURL()
            if created:
-               template = "shortener/success.html"
+            context = {
+                "object": obj,
+                "created": created,
+                "form" :  form,
+                "status":1,
+            }
            else:
-               template = "shortener/already_exists.html"
+            context = {
+                "object": obj,
+                "created": created,
+                "form" :  form,
+                "status":2,
+            }
+        else:
+            return redirect('/')
 
         return render(request, template, context)
 

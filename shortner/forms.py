@@ -2,13 +2,16 @@ from django import forms
 from .validators import validate_url, check_com
 
 class SubmitURL(forms.Form):
-     url = forms.CharField(label='Submit URL', validators=[validate_url,check_com])
-
-    
-    
-    
-    
-    
+     url = forms.CharField(label='', 
+                           validators=[validate_url,check_com],
+                           widget = forms.TextInput(
+                           attrs ={
+                          "placeholder": "Paste URL here",
+                          "id":"email",
+                          "name":"email"
+                                 }
+                          )
+                         )
     
     
     # def clean(self):

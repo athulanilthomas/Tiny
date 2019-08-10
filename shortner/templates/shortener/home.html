@@ -1,8 +1,32 @@
-<h1 style="text-align:center">{{ title }}</h1>
-<div style="text-align:center">
-<form action="."  method="post"> {% csrf_token %}
-    <!-- <input type="text" name="url" id="url"> -->
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
-</div>
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+		<!-- Header -->
+			<header id="header">
+				<h1><i style="color: #dadada" class="fab fa-github"></i>&nbsp<a href="/">Tiny</a></h1>
+				<p>A simple URL shortner application <br />
+				This application is brought to you by <a href="https://google.com">Athul Anil Thomas</a>.</p>
+			</header>
+
+		<!-- Signup Form -->
+			<form id="signup-form" method="post">  {% csrf_token %}
+				{{ form.as_p }}
+				<input type="submit" id="submit" value="Shorten"/>
+			</form>
+        {% if status is not None %}
+                <div class="grid-container">
+                    <div class="grid-item item5">
+                    {% if status == 2 %}
+                        <p style="color:#ed1250; margin-bottom:8px">* This URL already exists !!</p>
+                    {% endif %}
+                        <button class="show_code" id="code">Show <span style="font-weight: normal">Code</span></button>
+                    </div>
+                </div>
+        {% endif %}
+		<!-- Field contains the URL -->
+
+		<input type="hidden" id="tinyurl" value="{{ object.get_shortcode }}">
+
+{% endblock content %}
