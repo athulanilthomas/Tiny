@@ -1274,4 +1274,32 @@ input, select, textarea {
 	grid-column: 1 / span 3;
 	grid-row: 3;
 	text-align: center
-  }  
+  }
+  
+  .item5 p::before{
+	content: "\f0c5"; /* FontAwesome Unicode */
+	font-family: FontAwesome;
+	display: inline-block;
+  }
+
+  .error_container{
+	  text-align: left;
+  }
+
+  .error_container ul li:before {
+	content: "\f071"; /* FontAwesome Unicode */
+	font-family: FontAwesome;
+	display: inline-block;
+	padding-right: 15px;
+	margin-left: -1.6em; /* same as padding-left set on li */
+	width: 1.6em; /* same as padding-left set on li */
+  }
+
+  .error_container ul {
+	list-style: none;
+	padding: 0;
+  }
+  .error_container ul li {
+	padding-left: 1.6em;
+	color: #ed1250;
+  }

@@ -18,6 +18,9 @@ class HomePage(View):
     
     def post(self, request, *args, **kwargs):
         the_form = SubmitURL(request.POST)
+        context = {
+            "form" :  the_form,
+        }
         template = "shortener/home.html"
         if the_form.is_valid():
            new_url = the_form.cleaned_data.get("url")
@@ -37,8 +40,6 @@ class HomePage(View):
                 "form" :  form,
                 "status":2,
             }
-        else:
-            return redirect('/')
 
         return render(request, template, context)
 

@@ -10,16 +10,25 @@
 				This application is brought to you by <a href="https://google.com">Athul Anil Thomas</a>.</p>
 			</header>
 
-		<!-- Signup Form -->
+		<!-- URL Form -->
 			<form id="signup-form" method="post">  {% csrf_token %}
 				{{ form.as_p }}
 				<input type="submit" id="submit" value="Shorten"/>
 			</form>
+			{% if form.url.errors %}
+				<div class="error_container">
+					<ul>
+					{% for error in form.url.errors %}
+						<li><strong>{{ error|escape }}</strong></li>
+					{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
         {% if status is not None %}
                 <div class="grid-container">
                     <div class="grid-item item5">
                     {% if status == 2 %}
-                        <p style="color:#ed1250; margin-bottom:8px">* This URL already exists !!</p>
+                        <p style="color:#ed1250; margin-bottom:8px"> This URL already exists !!</p>
                     {% endif %}
                         <button class="show_code" id="code">Show <span style="font-weight: normal">Code</span></button>
                     </div>
