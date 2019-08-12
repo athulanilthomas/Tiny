@@ -3,16 +3,16 @@ from django.core.validators import URLValidator
 
 def validate_url(value):
     url_validator = URLValidator()
-    # reg_val = value
-    # if "http" in reg_val:
-    #     new_value = reg_val
-    # else:
-    #     new_value = 'http://' + value
+    reg_val = value
+    if "http" in reg_val:
+        new_value = reg_val
+    else:
+        new_value = 'http://' + value
     try:
-        url_validator(value)
+        url_validator(new_value)
     except:
         raise ValidationError("Entered URL is Invalid")
-    return value
+    return new_value
 
 def check_com(value):
     if not ".com" in value:

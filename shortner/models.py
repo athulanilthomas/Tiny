@@ -32,6 +32,8 @@ class tinyURL(models.Model):
     def save(self, *args, **kwargs):
         if self.short_code is None or self.short_code == "":
             self.short_code = shortcode_creator(self)
+        if not 'http' in self.url:
+            self.url = "http://" + self.url
         super(tinyURL, self).save(*args, **kwargs)
     
     def get_shortcode(self):
